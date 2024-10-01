@@ -8,3 +8,10 @@ export const NotebookSchema = new Schema({
     coverImg: { type: String, minlength: 1, maxLength: 500, required: true },
     creatorId: { type: Schema.ObjectId, ref: 'Account', required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
+
+NotebookSchema.virtual('creator', {
+    localField: 'creatorId',
+    ref: 'Account',
+    foreignField: '_id',
+    justOne: true
+})
