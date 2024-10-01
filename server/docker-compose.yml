@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    image: your-dockerhub-username/noter:latest
+    restart: unless-stopped
+    env_file:
+      - noter-env
+    ports:
+      - "3000:3000"
