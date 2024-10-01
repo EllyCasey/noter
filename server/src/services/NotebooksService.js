@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
+import { Forbidden } from "../utils/Errors.js"
 
 
 class NotebooksService {
@@ -15,7 +16,15 @@ class NotebooksService {
 
     async getNotebookById(notebookId) {
         const notebook = await dbContext.Notebooks.findById(notebookId).populate('creator entryCount', '-email')
+        if (notebook == null) throw new Error('that notebook does not exist')
         return notebook
+    }
+    async deleteNotebook(notebookId, userId) {
+        const notebookToDelete = await this.getNotebookById(notebookId)
+        if (userId != notebookToDelete.creatorId) throw new Forbidden('you may not delete this.')
+
+        await notebookToDelete.deleteOne()
+        return 'Notebook has been deleted'
     }
 }
 
