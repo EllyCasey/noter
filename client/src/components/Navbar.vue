@@ -18,9 +18,9 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-sm navbar-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center home-link">
         <p>HOME</p>
       </div>
     </router-link>
@@ -47,6 +47,10 @@ function toggleTheme() {
 <style scoped>
 a:hover {
   text-decoration: none;
+}
+
+.home-link {
+  color: black
 }
 
 .nav-link {
