@@ -10,7 +10,7 @@ class NotebooksService {
     }
 
     async getUserNotebooks(userId) {
-        const userNotebooks = await dbContext.Notebooks.find({ creatorId: userId }).populate('creator')
+        const userNotebooks = await dbContext.Notebooks.find({ creatorId: userId }).sort('-createdAt').populate('creator')
         return userNotebooks
     }
 
