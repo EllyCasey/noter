@@ -43,7 +43,7 @@ function resetForm() {
 
 <template>
     <form @submit.prevent="createNotebook()" class="row">
-        <div class="col-md-6 mb-3">
+        <!-- <div class="col-md-6 mb-3">
             <label for="notebook-title">Title:</label>
             <input v-model="notebookData.title" name="notebook-title" id="notebook-title" class="form-control"
                 minlength="3" maxlength="25" type="text" required>
@@ -70,7 +70,7 @@ function resetForm() {
         </div>
         <div class="mb-3">
             <button class="btn btn-primary">submit</button>
-        </div>
+        </div> -->
 
 
     </form>
