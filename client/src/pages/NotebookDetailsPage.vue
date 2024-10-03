@@ -2,17 +2,18 @@
 import { AppState } from '@/AppState.js';
 import { notebooksService } from '@/services/NotebooksService.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 
 const route = useRoute()
 
-const notebook = computed(() => AppState.activeNotebook)
+const activeNotebook = computed(() => AppState.activeNotebook)
 
-onMounted(() => {
+watch(() => route.params.notebookId, () => {
     getNotebookById()
-})
+}, { immediate: true })
+
 
 async function getNotebookById() {
     try {
@@ -27,9 +28,9 @@ async function getNotebookById() {
 
 
 <template>
-    <section v-if="notebook">
+    <section v-if="activeNotebook">
         <h1>this is the notebook details page</h1>
-        {{ notebook.title }}
+        {{ activeNotebook.title }}
     </section>
 </template>
 

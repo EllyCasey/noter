@@ -1,13 +1,14 @@
 <script setup>
+import { AppState } from '@/AppState.js';
+import { Notebook } from '@/models/Notebook.js';
+import { router } from '@/router.js';
 import { notebooksService } from '@/services/NotebooksService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue';
 
 
-
-const router = useRouter()
+const notebooks = computed(() => AppState.notebooks)
 
 const iconOptions = ['mdi-database', 'mdi-cloud', 'mdi-package', 'mdi-palette', 'mdi-home', 'mdi-code-array', 'mdi-xml', 'mdi-cash', 'mdi-food-apple', 'mdi-account', 'mdi-shield', 'mdi-pencil']
 
@@ -17,6 +18,26 @@ const notebookData = ref({
     color: '',
     coverImg: '',
 })
+
+onMounted(() => {
+    getUserNotebooks()
+})
+
+
+defineProps({ notebook: { type: Notebook, required: true } })
+
+
+
+
+async function getUserNotebooks() {
+    try {
+        await notebooksService.getUserNotebooks()
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
 
 async function createNotebook() {
     try {
@@ -79,12 +100,32 @@ function resetForm() {
                 <div class="mb-3">
                     <button class="btn btn-primary">submit</button>
                 </div>
-
-
             </form>
+            <hr />
+            <section class="container-fluid">
+                <div class="row">
+                    <div v-for="notebook in notebooks" :key="notebook.id" class="col-12 card notebook-card p-3">
+                        <div>
+                            <i class="mdi fs-3" :class="notebook.icon" :style="{ color: notebook.color }"></i>
+                            <span>{{ notebook.title }}</span>
+                        </div>
+                        <RouterLink :to="{ name: 'NotebookDetails', params: { notebookId: notebook.id } }">
+                            <div>
+                                <i class="mdi mdi-exit-to-app fs-1 selectable"></i>
+                            </div>
+                        </RouterLink>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+</style>
