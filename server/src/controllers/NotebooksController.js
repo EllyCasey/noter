@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import BaseController from "../utils/BaseController.js";
 import { notebooksService } from "../services/NotebooksService.js";
+import { entriesService } from "../services/EntriesService.js";
 
 
 export class NotebooksController extends BaseController {
@@ -8,6 +9,7 @@ export class NotebooksController extends BaseController {
         super('api/notebooks')
         this.router
             .get('/:notebookId', this.getNotebookById)
+            .get('/:notebookId/entries', this.getEntriesInNotebook)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getUserNotebooks)
             .post('', this.createNotebook)
@@ -42,6 +44,16 @@ export class NotebooksController extends BaseController {
             const notebookId = request.params.notebookId
             const notebook = await notebooksService.getNotebookById(notebookId)
             response.send(notebook)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getEntriesInNotebook(request, response, next) {
+        try {
+            const notebookId = request.params.notebookId
+            const entries = await entriesService.getEntriesInNotebook(notebookId)
+            response.send(entries)
         } catch (error) {
             next(error)
         }
