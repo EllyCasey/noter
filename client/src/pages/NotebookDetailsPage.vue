@@ -29,10 +29,22 @@ async function getNotebookById() {
 
 <template>
     <section v-if="activeNotebook">
-        <h1>this is the notebook details page</h1>
-        {{ activeNotebook.title }}
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6 notebook-title">
+                    <h1 class="p-2">{{ activeNotebook.title }}</h1>
+                </div>
+            </div>
+        </div>
+
     </section>
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.notebook-title {
+    background-color: #f8ca4c;
+    border-radius: 1em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+</style>

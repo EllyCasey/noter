@@ -24,6 +24,7 @@ function toggleTheme() {
         <p>HOME</p>
       </div>
     </router-link>
+    <h1 class="d-flex">NOTER</h1>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,6 +56,11 @@ a:hover {
 
 .nav-link {
   text-transform: uppercase;
+}
+
+.navbar {
+  background-color: #f8ca4c;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .navbar-nav .router-link-exact-active {
