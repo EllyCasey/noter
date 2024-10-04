@@ -11,6 +11,7 @@ export class NotebooksController extends BaseController {
             .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getUserNotebooks)
             .post('', this.createNotebook)
+            .put('/:notebookId', this.editNotebook)
             .delete('/:notebookId', this.deleteNotebook)
     }
 
@@ -40,6 +41,18 @@ export class NotebooksController extends BaseController {
         try {
             const notebookId = request.params.notebookId
             const notebook = await notebooksService.getNotebookById(notebookId)
+            response.send(notebook)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async editNotebook(request, response, next) {
+        try {
+            const userId = request.userInfo.id
+            const notebookData = request.body
+            notebookData.id = request.params.notebookId
+            const notebook = await notebooksService.editNotebook(notebookData, userId)
             response.send(notebook)
         } catch (error) {
             next(error)
