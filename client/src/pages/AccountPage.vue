@@ -34,17 +34,16 @@ async function getUserNotebooks() {
             <div class="col-12">
               <!-- NOTE notebook form goes here -->
               <NotebookForm />
-              <h1>Notebook Form</h1>
             </div>
           </div>
         </section>
-        <hr />
         <section class="container-fluid">
           <div class="row">
             <div class="col-12">
               <!-- NOTE chronologically ordered 'all entries' goes here-->
-              <p>Browse All Entries</p>
+              <h2 class="browse-entries">Browse All Entries</h2>
             </div>
+            <hr />
             <div v-for="notebook in notebooks" :key="notebook.id" class="col-12 card notebook-card p-1 selectable">
               <NotebookCard :notebook="notebook" />
 
@@ -64,7 +63,18 @@ img {
 }
 
 .notebook-card {
-  background-color: #eccbac;
+  background-color: #f8ca4c;
   margin: 1em;
+  color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.browse-entries {
+  color: white;
+  text-shadow: 2px 2px 4px black;
+  font-size: 40px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 </style>
