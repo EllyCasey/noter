@@ -4,9 +4,9 @@
     "./src/**/*.js"
   ],
   "compilerOptions": {
-    "lib": [
-      "ESNext"
-    ],
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "paths": {
       "@/*": [
         "./src/*"
