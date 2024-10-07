@@ -4,6 +4,9 @@
     "./src/**/*.js"
   ],
   "compilerOptions": {
+    "lib": [
+      "ESNext"
+    ],
     "paths": {
       "@/*": [
         "./src/*"

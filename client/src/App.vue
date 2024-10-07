@@ -47,7 +47,7 @@ const account = computed(() => AppState.account)
 }
 
 main {
-  background-image: url('https://static-cse.canva.com/blob/1431071/Patterns303.jpg');
+  background-image: url('https://img.freepik.com/premium-vector/cute-capybara-cartoon-seamless-pattern-vector-illustration_42750-1237.jpg');
   background-color: rgba(255, 255, 255, 0.25);
   background-blend-mode: lighten;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
