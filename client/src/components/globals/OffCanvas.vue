@@ -106,7 +106,7 @@ function resetForm() {
                 <div class="row">
                     <div v-for="notebook in notebooks" :key="notebook.id" class="col-12 card notebook-card p-3">
                         <div>
-                            <i class="mdi fs-3" :class="notebook.icon" :style="{ color: notebook.color }"></i>
+                            <i class="mdi fs-3 me-4" :class="notebook.icon" :style="{ color: notebook.color }"></i>
                             <span>{{ notebook.title }}</span>
                         </div>
                         <RouterLink :to="{ name: 'NotebookDetails', params: { notebookId: notebook.id } }">
@@ -127,5 +127,6 @@ function resetForm() {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 1em;
+    background-color: #f8ca4c;
 }
 </style>
