@@ -9,6 +9,9 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 
 const activeNotebook = computed(() => AppState.activeNotebook)
+const account = computed(() => AppState.account)
+const entries = computed(() => AppState.entries)
+
 
 watch(() => route.params.notebookId, () => {
     getNotebookById()
@@ -24,18 +27,45 @@ async function getNotebookById() {
     }
 }
 
+async function deleteNotebook() {
+    try {
+        const wantsToDelete = await Pop.confirm('Are you sure you want to delete this notebook?')
+        if (!wantsToDelete) { return }
+
+        await notebooksService.deleteNotebook(route.params.notebookId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
 </script>
 
 
 <template>
     <section v-if="activeNotebook">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
             <div class="row d-flex justify-content-center">
-                <div class="col-6 notebook-title">
-                    <h1 class="p-2">{{ activeNotebook.title }}</h1>
+                <div class="col-10 notebook-title ms-3 mb-3 d-flex justify-content-center">
+                    <h1 class="p-3 d-flex justify-content-center">{{ activeNotebook.title }}</h1>
+                </div>
+                <div class="col-2 d-flex justify-content-end w-1">
+                    <button v-if="activeNotebook.creatorId == account?.id" @click="deleteNotebook()"
+                        class="btn btn-danger rounded-pill mb-3">DELETE</button>
                 </div>
             </div>
         </div>
+        <!-- NOTE this is where the entries begin -->
+        <section class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div v-for="entry in entries" :key="entry.notebookId"
+                        class="col-8 card entry-card p-1 mb-3 selectable">
+                        <EntryCard :entry="entry.notebookId" />
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </section>
 </template>

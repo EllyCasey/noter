@@ -3,7 +3,6 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from '@/utils/Pop.js';
 import { notebooksService } from '@/services/NotebooksService.js';
-import NotebookCard from '@/components/globals/NotebookCard.vue';
 import NotebookForm from '@/components/globals/NotebookForm.vue';
 import { entriesService } from '@/services/EntriesService.js';
 import EntryCard from '@/components/globals/EntryCard.vue';
