@@ -5,13 +5,26 @@ import Pop from '@/utils/Pop.js';
 import { notebooksService } from '@/services/NotebooksService.js';
 import NotebookCard from '@/components/globals/NotebookCard.vue';
 import NotebookForm from '@/components/globals/NotebookForm.vue';
+import { entriesService } from '@/services/EntriesService.js';
+import EntryCard from '@/components/globals/EntryCard.vue';
 
 
 const notebooks = computed(() => AppState.notebooks)
+const entries = computed(() => AppState.entries)
 
 onMounted(() => {
   getUserNotebooks()
+  getUserEntries()
 })
+
+async function getUserEntries() {
+  try {
+    await entriesService.getUserEntries()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 
 async function getUserNotebooks() {
   try {
@@ -44,8 +57,8 @@ async function getUserNotebooks() {
               <h2 class="browse-entries">Browse All Entries</h2>
             </div>
             <hr />
-            <div v-for="notebook in notebooks" :key="notebook.id" class="col-12 card notebook-card p-1 selectable">
-              <NotebookCard :notebook="notebook" />
+            <div v-for="entry in entries" :key="entry.id" class="col-12 card entry-card p-1 selectable">
+              <EntryCard :entry="entry" />
 
             </div>
           </div>
@@ -62,7 +75,7 @@ img {
   max-width: 100px;
 }
 
-.notebook-card {
+.entry-card {
   background-color: #f8ca4c;
   margin: 1em;
   color: black;
