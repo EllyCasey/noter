@@ -1,6 +1,5 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-import EntryCard from '@/components/globals/EntryCard.vue';
 import EntryForm from '@/components/globals/EntryForm.vue';
 import { router } from '@/router.js';
 import { entriesService } from '@/services/EntriesService.js';
@@ -74,10 +73,13 @@ async function deleteNotebook() {
             <EntryForm />
         </div>
         <!-- NOTE this is where the entries begin -->
-        <section class="container">
+        <section class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-10">
+                    <h1>Browse Notebook Entries:</h1>
                     <div v-for="entry in entries" :key="entry.id" class="col-8 card entry-card p-1 mb-3 selectable">
+                        <img :src="entry.img" class="card-img-top" alt="entry cover photo">
+                        <h4>{{ entry.description }}</h4>
                     </div>
                 </div>
             </div>
@@ -92,5 +94,10 @@ async function deleteNotebook() {
     background-color: #f8ca4c;
     border-radius: 1em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.card {
+    margin-bottom: 1em;
+    background-color: #f8ca4c;
 }
 </style>

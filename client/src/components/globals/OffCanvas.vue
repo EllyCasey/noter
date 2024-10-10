@@ -5,7 +5,7 @@ import { router } from '@/router.js';
 import { notebooksService } from '@/services/NotebooksService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 
 const notebooks = computed(() => AppState.notebooks)

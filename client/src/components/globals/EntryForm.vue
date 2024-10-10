@@ -4,7 +4,7 @@
 
 
 <template>
-    <h1> Entry Form </h1>
+    <h2>Entry Form</h2>
 
 </template>
 
