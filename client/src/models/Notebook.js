@@ -12,6 +12,6 @@ export class Notebook{
         this.creatorId = data.creatorId
         this.createdAt = new Date(data.createdAt)
         this.updatedAt = new Date(data.updatedAt)
-        this.creator = new Account(data.creator)
+        this.creator = data.creator ? new Account(data.creator) : null
     }
 }

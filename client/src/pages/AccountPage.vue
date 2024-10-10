@@ -8,7 +8,6 @@ import { entriesService } from '@/services/EntriesService.js';
 import EntryCard from '@/components/globals/EntryCard.vue';
 
 
-const notebooks = computed(() => AppState.notebooks)
 const entries = computed(() => AppState.entries)
 
 onMounted(() => {

@@ -7,7 +7,6 @@ defineProps({ entry: { type: Entry, required: true } })
 
 
 <template>
-    <!-- <RouterLink :to="{ name: 'NotebookDetails', params: { notebookId: notebookId } }"> -->
     <div class="col-12">
         <img :src="entry.img" class="card-img-top" alt="entry cover photo">
     </div>
@@ -16,7 +15,6 @@ defineProps({ entry: { type: Entry, required: true } })
             <h4 class="entry-description">{{ entry.description }}</h4>
         </div>
     </div>
-    <!-- </RouterLink> -->
 </template>
 
 

@@ -1,5 +1,9 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import EntryCard from '@/components/globals/EntryCard.vue';
+import EntryForm from '@/components/globals/EntryForm.vue';
+import { router } from '@/router.js';
+import { entriesService } from '@/services/EntriesService.js';
 import { notebooksService } from '@/services/NotebooksService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, watch } from 'vue';
@@ -15,6 +19,7 @@ const entries = computed(() => AppState.entries)
 
 watch(() => route.params.notebookId, () => {
     getNotebookById()
+    getEntriesById()
 }, { immediate: true })
 
 
@@ -27,12 +32,22 @@ async function getNotebookById() {
     }
 }
 
+async function getEntriesById() {
+    try {
+        await entriesService.getEntriesById(route.params.notebookId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
 async function deleteNotebook() {
     try {
         const wantsToDelete = await Pop.confirm('Are you sure you want to delete this notebook?')
         if (!wantsToDelete) { return }
 
         await notebooksService.deleteNotebook(route.params.notebookId)
+        router.push({ name: 'Account' })
     }
     catch (error) {
         Pop.error(error);
@@ -55,13 +70,14 @@ async function deleteNotebook() {
                 </div>
             </div>
         </div>
+        <div>
+            <EntryForm />
+        </div>
         <!-- NOTE this is where the entries begin -->
         <section class="container">
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <div v-for="entry in entries" :key="entry.notebookId"
-                        class="col-8 card entry-card p-1 mb-3 selectable">
-                        <EntryCard :entry="entry.notebookId" />
+                    <div v-for="entry in entries" :key="entry.id" class="col-8 card entry-card p-1 mb-3 selectable">
                     </div>
                 </div>
             </div>
