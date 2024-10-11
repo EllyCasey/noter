@@ -35,8 +35,6 @@ const account = computed(() => AppState.account)
       </div>
     </section>
   </main>
-  <footer>
-  </footer>
 </template>
 
 <style lang="scss">
@@ -63,6 +61,6 @@ footer {
   position: fixed;
   bottom: 0px;
   right: 0px;
-  max-height: 20em;
+  max-height: 10em;
 }
 </style>

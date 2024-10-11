@@ -5,6 +5,13 @@ import { AppState } from "@/AppState.js"
 
 
 class EntriesService {
+  async createEntry(entryData) {
+      const response = await api.post('api/entries', entryData)
+      logger.log('new entry was created', response.data)
+      const createdEntry = new Entry(response.data)
+      AppState.entries.unshift(createdEntry)
+      return createdEntry
+  }
   async getEntriesById(notebookId) {
       const response = await api.get(`api/notebooks/${notebookId}/entries`)
       logger.log('entries received by id', response.data)
