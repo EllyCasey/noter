@@ -13,7 +13,7 @@ const iconOptions = ['mdi-database', 'mdi-cloud', 'mdi-package', 'mdi-palette', 
 const notebookData = ref({
     title: '',
     icon: '',
-    color: '',
+    color: '#FFFFFF',
     coverImg: '',
 })
 

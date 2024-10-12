@@ -78,6 +78,8 @@ async function deleteNotebook() {
                 <div class="col-10">
                     <h1>Browse Notebook Entries:</h1>
                     <div v-for="entry in entries" :key="entry.id" class="col-8 card entry-card p-1 mb-3 selectable">
+                        <h1 :style="{ backgroundImage: `url(${activeNotebook.coverImg})` }">{{ activeNotebook.title }}
+                        </h1>
                         <img :src="entry.img" class="card-img-top" alt="entry cover photo">
                         <h4>{{ entry.description }}</h4>
                     </div>

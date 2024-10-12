@@ -27,7 +27,8 @@ class EntriesService {
         entryToEdit.img = entryData.img || entryToEdit.img
         entryToEdit.notebookId = entryData.notebookId ?? entryToEdit.notebookId
         const newLocation = await notebooksService.getNotebookById(entryData.notebookId)
-        if (newLocation.creatorId != userId) throw new Error('This is not your notebook')
+        if (newLocation.creatorId != userId) throw new Forbidden('This is not your notebook')
+        //NOTE 29 and 30 need to be run conditionally only IF there is a notebookId
         // NOTE go get notebook that entry was moved to and verify the creator is you
         // Also it can be null, so it needs to check for that as well
         await entryToEdit.save()

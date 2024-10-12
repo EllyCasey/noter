@@ -9,6 +9,7 @@ const notebooks = computed(() => AppState.notebooks)
 const entryData = ref({
     description: '',
     img: '',
+    notebookId: null,
 })
 
 async function createEntry() {
@@ -38,14 +39,18 @@ async function createEntry() {
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="mdi mdi-camera"></i></span>
                             <input v-model="entryData.img" class="form-control" type="url" maxlength="500"
-                                name="entry-img" id="entry-img" required>
+                                name="entry-img" id="entry-img">
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 ms-1">
                         <label for="notebook-titles">Notebooks:</label>
-                        <select class="form-control" name="notebook-titles" id="notebook-titles" required>
-                            <option disabled value="">please select...</option>
-                            <option value="notebook1">placeholder..</option>
+                        <select v-model="entryData.notebookId" class="form-control" name="notebook-titles"
+                            id="notebook-titles">
+                            <option value="">please select...</option>
+                            <option v-for="notebook in notebooks" :key="notebook.title" :value="notebook.id">{{
+                                notebook.title
+                                }}
+                            </option>
                         </select>
                     </div>
                     <button class="round ms-2 mt-2"><i class="mdi mdi-plus"></i></button>

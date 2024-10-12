@@ -37,7 +37,7 @@ export class EntriesController extends BaseController {
 
     async editEntry(request, response, next) {
         try {
-            const userId = request.userInfo.userId
+            const userId = request.userInfo.id
             const entryData = request.body
             entryData.id = request.params.entryId
             const entry = await entriesService.editEntry(entryData, userId)
@@ -57,5 +57,6 @@ export class EntriesController extends BaseController {
             next(error)
         }
     }
+
 
 }
