@@ -53,7 +53,10 @@ async function createEntry() {
                             </option>
                         </select>
                     </div>
-                    <button class="round ms-2 mt-2"><i class="mdi mdi-plus"></i></button>
+                    <div>
+                        <button class="round ms-2 mt-2"><i class="mdi mdi-plus"></i></button>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -108,6 +108,7 @@ function resetForm() {
                         <div>
                             <i class="mdi fs-3 me-4" :class="notebook.icon" :style="{ color: notebook.color }"></i>
                             <span>{{ notebook.title }}</span>
+                            <span>{{ notebook.entryCount }}</span>
                         </div>
                         <RouterLink :to="{ name: 'NotebookDetails', params: { notebookId: notebook.id } }">
                             <div>
