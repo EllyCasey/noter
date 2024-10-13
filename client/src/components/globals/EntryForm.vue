@@ -49,7 +49,7 @@ async function createEntry() {
                             <option value="">please select...</option>
                             <option v-for="notebook in notebooks" :key="notebook.title" :value="notebook.id">{{
                                 notebook.title
-                                }}
+                            }}
                             </option>
                         </select>
                     </div>

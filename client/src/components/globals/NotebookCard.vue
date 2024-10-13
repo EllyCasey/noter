@@ -18,6 +18,7 @@ defineProps({ notebook: { type: Notebook, required: true } })
             </div>
             <div class="col-10">
                 <h4 class="notebook-title">{{ notebook.title }}</h4>
+                <h5 class="entry-count">{{ notebook.entryCount }}</h5>
             </div>
         </div>
     </RouterLink>

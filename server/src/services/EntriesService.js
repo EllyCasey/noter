@@ -11,12 +11,12 @@ class EntriesService {
         return entry
     }
     async getUserEntries(userId) {
-        const userEntries = await dbContext.Entries.find({ creatorId: userId }).populate('notebook')
+        const userEntries = await dbContext.Entries.find({ creatorId: userId }).sort('-createdAt').populate('notebook')
         return userEntries
     }
 
     async getEntriesInNotebook(notebookId) {
-        const entries = await dbContext.Entries.find({ notebookId: notebookId }).populate('notebook')
+        const entries = await dbContext.Entries.find({ notebookId: notebookId }).sort('-createdAt').populate('notebook')
         return entries
     }
     async editEntry(entryData, userId) {
