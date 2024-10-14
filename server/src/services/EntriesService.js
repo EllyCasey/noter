@@ -28,13 +28,12 @@ class EntriesService {
         if (entryToEdit.creatorId != userId) throw new Forbidden('you did not create this, you may not change it.')
         entryToEdit.creatorId = entryToEdit.creatorId
         entryToEdit.description = entryData.description || entryToEdit.description
-        entryToEdit.img = entryData.img || entryToEdit.img
+        entryToEdit.img = entryData.img ?? entryToEdit.img
         entryToEdit.notebookId = entryData.notebookId ?? entryToEdit.notebookId
-        const newLocation = await notebooksService.getNotebookById(entryData.notebookId)
-        if (newLocation.creatorId != userId) throw new Forbidden('This is not your notebook')
-        //NOTE 29 and 30 need to be run conditionally only IF there is a notebookId
-        // NOTE go get notebook that entry was moved to and verify the creator is you
-        // Also it can be null, so it needs to check for that as well
+        if (entryData.notebookId != null) {
+            const newLocation = await notebooksService.getNotebookById(entryData.notebookId)
+            if (newLocation.creatorId != userId) throw new Forbidden('This is not your notebook')
+        }
         await entryToEdit.save()
         return `your entry has been updated`
     }

@@ -54,7 +54,7 @@ async function deleteEntry() {
 <template>
     <form @submit.prevent="UpdateEntry()">
         <div class="col-12">
-            <h1 v-if="entry.notebookId" :style="{ backgroundImage: `url(${entry.notebook.coverImg})` }">{{
+            <h1 v-if="entry.notebook" :style="{ backgroundImage: `url(${entry.notebook.coverImg})` }">{{
                 entry.notebook.title }}
             </h1>
             <h1 v-else class="pt-2"></h1>
@@ -68,7 +68,7 @@ async function deleteEntry() {
                 <textarea v-model="entryData.description" class="form-control" rows="10" cols="50"></textarea>
             </div>
             <div class="col-12 d-flex flex-direction-row justify-content-between">
-                <div class="col-md-4 col-12 mb-3">
+                <div class="col-md-4 col-12 mb-3 mt-1">
                     <label for="entry-img">Image:</label>
                     <input v-model="entryData.img" type="url" maxlength="500" name="entry-img">
                 </div>
@@ -80,7 +80,8 @@ async function deleteEntry() {
                             notebook.title }}</option>
                     </select>
                     <div class="d-flex justify-content-end">
-                        <button class="round-save  ms-2 mt-2"><i class="mdi mdi-content-save-all-outline"></i></button>
+                        <button v-if="account != null" class="round-save  ms-2 mt-2"><i
+                                class="mdi mdi-content-save-all-outline"></i></button>
                     </div>
                 </div>
             </div>

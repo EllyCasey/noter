@@ -22,7 +22,7 @@ class EntriesService {
     logger.log('new entry was created', response.data)
     const createdEntry = new Entry(response.data)
     const activeNotebook = AppState.activeNotebook
-    if (activeNotebook.id == createdEntry.notebookId)
+    if (activeNotebook?.id == createdEntry.notebookId)
       AppState.entries.unshift(createdEntry)
       return createdEntry
   }
@@ -31,7 +31,7 @@ class EntriesService {
       logger.log('updated the entry', response.data)
       const newEntry = new Entry(response.data)
       const entryIndex = AppState.entries.findIndex(entry => entryData.id == entry.id)
-      AppState.entries.splice(entryIndex, 1, newEntry)
+      // AppState.entries.splice(entryIndex, 1, newEntry)
   }
 
   async deleteEntry(id) {

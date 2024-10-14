@@ -65,7 +65,7 @@ async function deleteNotebook() {
                     :style="{ backgroundImage: `url(${activeNotebook.coverImg})` }">
                     <h1 class="p-3 d-flex justify-content-center">{{ activeNotebook.title }}</h1>
                 </div>
-                <div class="col-12 d-flex justify-content-between fs-5">
+                <div class="col-12 d-flex justify-content-between mb-3 fs-5 bg-glass">
                     <p>Created At: {{ activeNotebook.createdAt.toLocaleString() }}</p>
                     <h1><i class="mdi" :class="activeNotebook.icon" :style="{ color: activeNotebook.color }"></i></h1>
                     <p>Updated At: {{ activeNotebook.updatedAt.toLocaleString() }}</p>
@@ -103,5 +103,10 @@ async function deleteNotebook() {
 .card {
     margin-bottom: 1em;
     background-color: #f8ca4c;
+}
+
+.bg-glass {
+    background-color: #f8ca4c5b;
+    backdrop-filter: blur(20px);
 }
 </style>
