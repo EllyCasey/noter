@@ -61,8 +61,14 @@ async function deleteNotebook() {
     <section v-if="activeNotebook">
         <div class="container-fluid pt-3">
             <div class="row d-flex justify-content-center">
-                <div class="col-10 notebook-title ms-3 mb-3 d-flex justify-content-center">
+                <div class="col-12 notebook-title ms-3 mb-3 d-flex p-5 justify-content-center"
+                    :style="{ backgroundImage: `url(${activeNotebook.coverImg})` }">
                     <h1 class="p-3 d-flex justify-content-center">{{ activeNotebook.title }}</h1>
+                </div>
+                <div class="col-12 d-flex justify-content-between fs-5">
+                    <p>Created At: {{ activeNotebook.createdAt.toLocaleString() }}</p>
+                    <h1><i class="mdi" :class="activeNotebook.icon" :style="{ color: activeNotebook.color }"></i></h1>
+                    <p>Updated At: {{ activeNotebook.updatedAt.toLocaleString() }}</p>
                 </div>
                 <div class="col-2 d-flex justify-content-end w-1">
                     <button v-if="activeNotebook.creatorId == account?.id" @click="deleteNotebook()"
@@ -88,6 +94,10 @@ async function deleteNotebook() {
     background-color: #f8ca4c;
     border-radius: 1em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-size: cover;
+    color: whitesmoke;
+    font-size: 26px;
+    text-shadow: 2px 2px black;
 }
 
 .card {
