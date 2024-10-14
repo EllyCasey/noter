@@ -70,7 +70,7 @@ async function deleteNotebook() {
                 </div>
             </div>
         </div>
-        <div class="mb-3">
+        <div v-if="account != null" class="mb-3">
             <EntryForm />
         </div>
         <!-- NOTE this is where the entries begin -->

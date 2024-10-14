@@ -5,9 +5,12 @@ import { entriesService } from '@/services/EntriesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 
 const notebooks = computed(() => AppState.notebooks)
+const account = computed(() => AppState.account)
 
 
 
@@ -34,17 +37,16 @@ async function UpdateEntry() {
         logger.error(error)
     }
 }
-// NOTE THIS IS WRONG
 async function deleteEntry() {
-    // try {
-    //     const wantsToDelete = await Pop.confirm('Are you sure you want to delete this entry?')
-    //     if (!wantsToDelete) { return }
-    //     await entriesService.deleteEntry(route.params.entryData)
-    // }
-    // catch (error) {
-    //     Pop.error(error);
-    //     logger.error(error)
-    // }
+    try {
+        const wantsToDelete = await Pop.confirm('Are you sure you want to delete this entry?')
+        if (!wantsToDelete) { return }
+        await entriesService.deleteEntry(entryData.value.id)
+    }
+    catch (error) {
+        Pop.error(error);
+        logger.error(error)
+    }
 }
 </script>
 
@@ -85,7 +87,7 @@ async function deleteEntry() {
         </div>
     </form>
     <div class="col-12 d-flex justify-content-center ">
-        <button @submit.prevent="deleteEntry()" class="round-delete  ms-2 mt-2 mb-3"><i
+        <button @click="deleteEntry()" v-if="account != null" class="round-delete  ms-2 mt-2 mb-3" type="button"><i
                 class="mdi mdi-delete"></i></button>
     </div>
     <div class="col-12 d-flex justify-content-end me-2">

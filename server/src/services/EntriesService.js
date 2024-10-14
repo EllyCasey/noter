@@ -5,7 +5,11 @@ import { notebooksService } from "./NotebooksService.js";
 
 class EntriesService {
 
-    async createEntry(entryData) {
+    async createEntry(entryData, userId) {
+        if (entryData.notebookId != null) {
+            const canCreateEntry = await notebooksService.getNotebookById(entryData.notebookId);
+            if (canCreateEntry.creatorId != userId) throw new Forbidden('You did not create this notebook and may not create an entry for it.')
+        }
         const entry = await dbContext.Entries.create(entryData)
         await entry.populate('notebook')
         return entry

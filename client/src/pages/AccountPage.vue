@@ -6,9 +6,11 @@ import { notebooksService } from '@/services/NotebooksService.js';
 import NotebookForm from '@/components/globals/NotebookForm.vue';
 import { entriesService } from '@/services/EntriesService.js';
 import EntryCard from '@/components/globals/EntryCard.vue';
+import EntryForm from '@/components/globals/EntryForm.vue';
 
 
 const entries = computed(() => AppState.entries)
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   getUserNotebooks()
@@ -44,7 +46,9 @@ async function getUserNotebooks() {
           <div class="row">
             <div class="col-12">
               <!-- NOTE notebook form goes here -->
-              <NotebookForm />
+              <div v-if="account != null" class="mb-3">
+                <EntryForm />
+              </div>
             </div>
           </div>
         </section>

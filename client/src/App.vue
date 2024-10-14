@@ -61,6 +61,10 @@ footer {
   position: fixed;
   bottom: 0px;
   right: 0px;
+  max-height: 15em;
+}
+
+.helper-dude:hover {
   max-height: 10em;
 }
 </style>

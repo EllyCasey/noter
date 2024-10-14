@@ -15,10 +15,11 @@ export class EntriesController extends BaseController {
 
     async createEntry(request, response, next) {
         try {
+            const userId = request.userInfo.id
             const entryData = request.body
             const userInfo = request.userInfo
             entryData.creatorId = userInfo.id
-            const entry = await entriesService.createEntry(entryData)
+            const entry = await entriesService.createEntry(entryData, userId)
             response.send(entry)
         } catch (error) {
             next(error)
