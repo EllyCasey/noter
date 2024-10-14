@@ -56,6 +56,8 @@ async function getUserNotebooks() {
             </div>
             <hr />
             <div v-for="entry in entries" :key="entry.id" class="col-12 card entry-card p-1 selectable">
+              <div v-if="entry.notebookId" :style="{ backgroundImage: `url(${entry.notebookId.coverImg})` }">{{
+                entry.notebookId.title }}</div>
               <EntryCard :entry="entry" />
 
             </div>
